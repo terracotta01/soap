@@ -1,0 +1,186 @@
+<!--cia banko soap aprasymas-->
+<!--http://www.lb.lt/webservices/fxrates/FxRates.asmx?op=getFxRatesForCurrency-->
+
+<!--cia banko visu funkciju aprasymas nzn ar reiks-->
+<!--http://www.lb.lt/webservices/fxrates/-->
+
+<!--dariau pagal sita zemiau pvz-->
+<!--    https://stackoverflow.com/questions/48895327/using-javascript-fetch-api-with-a-soap-web-service-->
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    var url = 'http://www.lb.lt/webservices/fxrates/FxRates.asmx';
+
+    function soap(sr) {
+        var headers = new Headers();
+//        headers.append('Host', 'old.lb.lt');
+        headers.append('Content-Type', 'text/xml');
+//        headers.append('Content-Length', 'length');
+//        headers.append('SOAPAction', 'http://www.lb.lt/WebServices/FxRates/getFxRatesForCurrency');
+        
+//        i kintamaji sr irasiau reiksmes tokias kur su postman gavau atsakyma EU USD 2018-12-03 2018-12-03. inputai nieko nedaro dar
+        var sr =
+            '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><getFxRatesForCurrency xmlns="http://www.lb.lt/WebServices/FxRates"<tp>EU</tp><ccy>USD</ccy><dtFrom>2018-12-03</dtFrom><dtTo>2018-12-03</dtTo></getFxRatesForCurrency></soap:Body></soap:Envelope>';
+
+//                var sr =
+//                '<?xml version="1.0" encoding="utf-8"?>' +
+//                '<soap:Envelope ' +
+//                    'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
+//                    'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
+//                    'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" ' +
+//                    '<soap:Body>' +
+//                        '<getFxRatesForCurrency xmlns="http://www.lb.lt/WebServices/FxRates">' +
+//                            '<tp>EU</tp>' +
+//                            '<ccy>USD</ccy>' +
+//                            '<dtFrom>2018-12-04</dtFrom>' +
+//                            '<dtTo>2018-12-04</dtTo>' +
+//                            '<tp>' + $("#cur1").val() + '</tp>' +
+//                            '<ccy>' + $("#cur2").val() + '</ccy>' +
+//                            '<dtFrom>' + $("#dateFrom").val() + '</dtFrom>' +
+//                            '<dtTo>' + $("#dateTo").val() + '</dtTo>' +
+//                        '</getFxRatesForCurrency>' +
+//                    '</soap:Body>' +
+//                '</soap:Envelope>';
+        console.log('about to send ' + sr);
+
+        fetch(url, {
+            body: sr,
+            method: 'POST',
+            mode: 'no-cors',
+            headers: headers
+//            credentials: 'include'
+        })
+            .then(response => console.log(response))
+            .catch(function() {
+              console.log("Network failure");
+                
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <form name="Demo" action="index.html" method="post">
+        <div>
+            <select>
+                <option value="EU">EU</option>
+                <option value="LT">LT</option>
+            </select>
+        </div>
+        <div>
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="AUD">EUR</option>
+                <option value="AUD">AUD</option>
+                <option value="BGN">BGN</option>
+                <option value="BRL">BRL</option>
+                <option value="CAD">CAD</option>
+                <option value="CHF">CHF</option>
+                <option value="CNY">CNY</option>
+                <option value="CZK">CZK</option>
+                <option value="DKK">DKK</option>
+                <option value="GBP">GBP</option>
+                <option value="HKD">HKD</option>
+                <option value="HRK">HRK</option>
+                <option value="HUF">HUF</option>
+                <option value="IDR">IDR</option>
+                <option value="ILS">ILS</option>
+                <option value="INR">INR</option>
+                <option value="JPY">JPY</option>
+                <option value="KRW">KRW</option>
+                <option value="MYR">MYR</option>
+                <option value="MXN">MXN</option>
+                <option value="NOK">NOK</option>
+                <option value="NZD">NZD</option>
+                <option value="PHP">PHP</option>
+                <option value="PLN">PLN</option>
+                <option value="RON">RON</option>
+                <option value="RUB">RUB</option>
+                <option value="SEK">SEK</option>
+                <option value="SGD">SGD</option>
+                <option value="THB">THB</option>
+                <option value="TRY">TRY</option>
+                <option value="USD">USD</option>
+                <option value="ZAR">ZAR</option>
+                <option value="AED">AED</option>
+                <option value="AFN">AFN</option>
+                <option value="ALL">ALL</option>
+                <option value="AMD">AMD</option>
+                <option value="ARS">ARS</option>
+                <option value="AZN">AZN</option>
+                <option value="BAM">BAM</option>
+                <option value="BDT">BDT</option>
+                <option value="BHD">BHD</option>
+                <option value="BYN">BYN</option>
+                <option value="BOB">BOB</option>
+                <option value="CLP">CLP</option>
+                <option value="COP">COP</option>
+                <option value="DJF">DJF</option>
+                <option value="DZD">DZD</option>
+                <option value="EGP">EGP</option>
+                <option value="ETB">ETB</option>
+                <option value="GEL">GEL</option>
+                <option value="GNF">GNF</option>
+                <option value="YER">YER</option>
+                <option value="IQD">IQD</option>
+                <option value="IRR">IRR</option>
+                <option value="JOD">JOD</option>
+                <option value="KES">KES</option>
+                <option value="KGS">KGS</option>
+                <option value="KWD">KWD</option>
+                <option value="KZT">KZT</option>
+                <option value="LBP">LBP</option>
+                <option value="LKR">LKR</option>
+                <option value="MAD">MAD</option>
+                <option value="MDL">MDL</option>
+                <option value="MGA">MGA</option>
+                <option value="MKD">MKD</option>
+                <option value="MNT">MNT</option>
+                <option value="MZN">MZN</option>
+                <option value="PAB">PAB</option>
+                <option value="PEN">PEN</option>
+                <option value="PKR">PKR</option>
+                <option value="QAR">QAR</option>
+                <option value="RSD">RSD</option>
+                <option value="SAR">SAR</option>
+                <option value="SYP">SYP</option>
+                <option value="TJS">TJS</option>
+                <option value="TMT">TMT</option>
+                <option value="TND">TND</option>
+                <option value="TZS">TZS</option>
+                <option value="UAH">UAH</option>
+                <option value="UYU">UYU</option>
+                <option value="UZS">UZS</option>
+                <option value="VEF">VEF</option>
+                <option value="VND">VND</option>
+                <option value="XAF">XAF</option>
+                <option value="XOF">XOF</option>
+            </select>
+        </div>
+        <div>
+            <input type="date" value="dateFrom"/>
+        </div>
+        <div>
+            <input type="date" value="dateTo"/>
+        </div>
+        <div>
+            <input type="button" value="Soap" id='myButt' onclick="soap();" />
+        </div>
+    </form>
+    <div id="response" ></div>
+
+    <!-- https://stackoverflow.com/questions/124269/simplest-soap-example?
+
+    https://stackoverflow.com/questions/48969449/processing-replies-from-the-javascript-fetch-api
+    https://jakearchibald.com/2015/thats-so-fetch/
+    http://www.lb.lt/webservices/fxrates/FxRates.asmx?op=getFxRatesForCurrency
+    http://localhost/php/ui/index.html
+    https://www.chromium.org/Home/chromium-security/corb-for-developers -->
+
+</body>
+</html>
