@@ -1,0 +1,36 @@
+* {
+  font-family: serif;
+}
+
+.box, table {
+  width: 350px;
+}
+
+#selectCurrency, #selectfxType {
+  width: 100%;
+}
+
+#inputDateFrom, #inputDateTo {
+  width: 50;
+}
+
+form, h4, table, #difference {
+  margin: 20px;
+}
+
+input {
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid grey;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 15px;
+  text-align: center;
+}

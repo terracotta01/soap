@@ -1,186 +1,131 @@
-<!--cia banko soap aprasymas-->
-<!--http://www.lb.lt/webservices/fxrates/FxRates.asmx?op=getFxRatesForCurrency-->
-
-<!--cia banko visu funkciju aprasymas nzn ar reiks-->
-<!--http://www.lb.lt/webservices/fxrates/-->
-
-<!--dariau pagal sita zemiau pvz-->
-<!--    https://stackoverflow.com/questions/48895327/using-javascript-fetch-api-with-a-soap-web-service-->
+<!-- Windows vartotojui: paleisti Google Chrome naršyklę taip: Start-> Run -> įvesti žemiau nurodytą tekstą, kuris išjungia naršyklės apsaugą
+chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+-->
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-    <script type="text/javascript">
-
-    var url = 'http://www.lb.lt/webservices/fxrates/FxRates.asmx';
-
-    function soap(sr) {
-        var headers = new Headers();
-//        headers.append('Host', 'old.lb.lt');
-        headers.append('Content-Type', 'text/xml');
-//        headers.append('Content-Length', 'length');
-//        headers.append('SOAPAction', 'http://www.lb.lt/WebServices/FxRates/getFxRatesForCurrency');
-        
-//        i kintamaji sr irasiau reiksmes tokias kur su postman gavau atsakyma EU USD 2018-12-03 2018-12-03. inputai nieko nedaro dar
-        var sr =
-            '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><getFxRatesForCurrency xmlns="http://www.lb.lt/WebServices/FxRates"<tp>EU</tp><ccy>USD</ccy><dtFrom>2018-12-03</dtFrom><dtTo>2018-12-03</dtTo></getFxRatesForCurrency></soap:Body></soap:Envelope>';
-
-//                var sr =
-//                '<?xml version="1.0" encoding="utf-8"?>' +
-//                '<soap:Envelope ' +
-//                    'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
-//                    'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
-//                    'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" ' +
-//                    '<soap:Body>' +
-//                        '<getFxRatesForCurrency xmlns="http://www.lb.lt/WebServices/FxRates">' +
-//                            '<tp>EU</tp>' +
-//                            '<ccy>USD</ccy>' +
-//                            '<dtFrom>2018-12-04</dtFrom>' +
-//                            '<dtTo>2018-12-04</dtTo>' +
-//                            '<tp>' + $("#cur1").val() + '</tp>' +
-//                            '<ccy>' + $("#cur2").val() + '</ccy>' +
-//                            '<dtFrom>' + $("#dateFrom").val() + '</dtFrom>' +
-//                            '<dtTo>' + $("#dateTo").val() + '</dtTo>' +
-//                        '</getFxRatesForCurrency>' +
-//                    '</soap:Body>' +
-//                '</soap:Envelope>';
-        console.log('about to send ' + sr);
-
-        fetch(url, {
-            body: sr,
-            method: 'POST',
-            mode: 'no-cors',
-            headers: headers
-//            credentials: 'include'
-        })
-            .then(response => console.log(response))
-            .catch(function() {
-              console.log("Network failure");
-                
-            });
-        }
-
-    </script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <form name="Demo" action="index.html" method="post">
-        <div>
-            <select>
-                <option value="EU">EU</option>
-                <option value="LT">LT</option>
-            </select>
-        </div>
-        <div>
-            <select>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="AUD">EUR</option>
-                <option value="AUD">AUD</option>
-                <option value="BGN">BGN</option>
-                <option value="BRL">BRL</option>
-                <option value="CAD">CAD</option>
-                <option value="CHF">CHF</option>
-                <option value="CNY">CNY</option>
-                <option value="CZK">CZK</option>
-                <option value="DKK">DKK</option>
-                <option value="GBP">GBP</option>
-                <option value="HKD">HKD</option>
-                <option value="HRK">HRK</option>
-                <option value="HUF">HUF</option>
-                <option value="IDR">IDR</option>
-                <option value="ILS">ILS</option>
-                <option value="INR">INR</option>
-                <option value="JPY">JPY</option>
-                <option value="KRW">KRW</option>
-                <option value="MYR">MYR</option>
-                <option value="MXN">MXN</option>
-                <option value="NOK">NOK</option>
-                <option value="NZD">NZD</option>
-                <option value="PHP">PHP</option>
-                <option value="PLN">PLN</option>
-                <option value="RON">RON</option>
-                <option value="RUB">RUB</option>
-                <option value="SEK">SEK</option>
-                <option value="SGD">SGD</option>
-                <option value="THB">THB</option>
-                <option value="TRY">TRY</option>
-                <option value="USD">USD</option>
-                <option value="ZAR">ZAR</option>
-                <option value="AED">AED</option>
-                <option value="AFN">AFN</option>
-                <option value="ALL">ALL</option>
-                <option value="AMD">AMD</option>
-                <option value="ARS">ARS</option>
-                <option value="AZN">AZN</option>
-                <option value="BAM">BAM</option>
-                <option value="BDT">BDT</option>
-                <option value="BHD">BHD</option>
-                <option value="BYN">BYN</option>
-                <option value="BOB">BOB</option>
-                <option value="CLP">CLP</option>
-                <option value="COP">COP</option>
-                <option value="DJF">DJF</option>
-                <option value="DZD">DZD</option>
-                <option value="EGP">EGP</option>
-                <option value="ETB">ETB</option>
-                <option value="GEL">GEL</option>
-                <option value="GNF">GNF</option>
-                <option value="YER">YER</option>
-                <option value="IQD">IQD</option>
-                <option value="IRR">IRR</option>
-                <option value="JOD">JOD</option>
-                <option value="KES">KES</option>
-                <option value="KGS">KGS</option>
-                <option value="KWD">KWD</option>
-                <option value="KZT">KZT</option>
-                <option value="LBP">LBP</option>
-                <option value="LKR">LKR</option>
-                <option value="MAD">MAD</option>
-                <option value="MDL">MDL</option>
-                <option value="MGA">MGA</option>
-                <option value="MKD">MKD</option>
-                <option value="MNT">MNT</option>
-                <option value="MZN">MZN</option>
-                <option value="PAB">PAB</option>
-                <option value="PEN">PEN</option>
-                <option value="PKR">PKR</option>
-                <option value="QAR">QAR</option>
-                <option value="RSD">RSD</option>
-                <option value="SAR">SAR</option>
-                <option value="SYP">SYP</option>
-                <option value="TJS">TJS</option>
-                <option value="TMT">TMT</option>
-                <option value="TND">TND</option>
-                <option value="TZS">TZS</option>
-                <option value="UAH">UAH</option>
-                <option value="UYU">UYU</option>
-                <option value="UZS">UZS</option>
-                <option value="VEF">VEF</option>
-                <option value="VND">VND</option>
-                <option value="XAF">XAF</option>
-                <option value="XOF">XOF</option>
-            </select>
-        </div>
-        <div>
-            <input type="date" value="dateFrom"/>
-        </div>
-        <div>
-            <input type="date" value="dateTo"/>
-        </div>
-        <div>
-            <input type="button" value="Soap" id='myButt' onclick="soap();" />
-        </div>
-    </form>
-    <div id="response" ></div>
-
-    <!-- https://stackoverflow.com/questions/124269/simplest-soap-example?
-
-    https://stackoverflow.com/questions/48969449/processing-replies-from-the-javascript-fetch-api
-    https://jakearchibald.com/2015/thats-so-fetch/
-    http://www.lb.lt/webservices/fxrates/FxRates.asmx?op=getFxRatesForCurrency
-    http://localhost/php/ui/index.html
-    https://www.chromium.org/Home/chromium-security/corb-for-developers -->
-
+	<h4>Užsienio valiutos santykiai laikotarpyje</h4>
+  <form name="Demo" action="index.html" method="post">
+    <div class="box">
+      <select id="selectfxType">
+<!--        <option value="" disabled selected>Pasirinkite valiutos kurso tipą</option>-->
+        <option value="EU">EU (duomenys bazėje nuo 2014-09-30)</option>
+        <option value="LT">LT (duomenys bazėje iki 2014-12-31)</option>
+      </select>
+			<p> Išsamiau apie galimus
+				<a href="http://www.lb.lt/webservices/fxrates/">valiutos kurso tipus</a>
+			</p>
+    </div>
+    <div class="box">
+      <select id="selectCurrency">
+<!--     <option value="" disabled selected>Pasirinkite valiutą</option>-->
+          <option value="AUD">Australijos doleris (AUD)</option>
+          <option value="BGN">Bulgarijos levas (BGN)</option>
+          <option value="BRL">Brazilijos realas (BRL)</option>
+          <option value="CAD">Kanados doleris (CAD)</option>
+          <option value="CHF">Šveicarijos frankas (CHF)</option>
+          <option value="CNY">Kinijos ženminbi juanis (CNY)</option>
+          <option value="CZK">Čekijos krona (CZK)</option>
+          <option value="DKK">Danijos krona (DKK)</option>
+          <option value="GBP">Didžiosios Britanijos svaras sterlingų (GBP)</option>
+          <option value="HKD">Honkongo doleris (HKD)</option>
+          <option value="HRK">Kroatijos kuna (HRK)</option>
+          <option value="HUF">Vengrijos forintas (HUF)</option>
+          <option value="IDR">Indonezijos rupija (IDR)</option>
+          <option value="ILS">Izraelio naujasis šekelis (ILS)</option>
+          <option value="INR">Indijos rupija (INR)</option>
+          <option value="ISK">Islandijos krona (ISK)</option>
+          <option value="JPY">Japonijos jena (JPY)</option>
+          <option value="KRW">Pietų Korėjos vonas (KRW)</option>
+          <option value="MYR">Malaizijos ringitas (MYR)</option>
+          <option value="MXN">Meksikos pesas (MXN)</option>
+          <option value="NOK">Norvegijos krona(NOK)</option>
+          <option value="NZD">Naujosios Zelandijos doleris(NZD)</option>
+          <option value="PHP">Filipinų pesas (PHP)</option>
+          <option value="PLN">Lenkijos zlotas (PLN)</option>
+          <option value="RON">Ruminijos lėja (RON)</option>
+          <option value="RUB">Rusijos rublis (RUB)</option>
+          <option value="SEK">Švedijos krona (SEK)</option>
+          <option value="SGD">Singapūro doleris (SGD)</option>
+          <option value="THB">Tailando batas (THB)</option>
+          <option value="TRY">Turkijos lyra (TRY)</option>
+          <option value="USD">JAV doleris (USD)</option>
+          <option value="ZAR">Pietų Afrikos Respublikos randas (ZAR)</option>
+          <option value="AED">Jungtinių Arabų Emiratų dirhamas (AED)</option>
+          <option value="AFN">Afganistano afganis (AFN)</option>
+          <option value="ALL">Albanijos lekas (ALL)</option>
+          <option value="AMD">Armėnijos dramas (AMD)</option>
+          <option value="ARS">Argentinos pesas (ARS)</option>
+          <option value="AZN">Azerbaidžano manatas (AZN)</option>
+          <option value="BAM">Bosnijos ir Hercegovinos konvertuojamoji markė (BAM)</option>
+          <option value="BDT">Bangladešo taka (BDT)</option>
+          <option value="BHD">Bahreino dinaras (BHD)</option>
+          <option value="BYN">Baltarusijos rublis (BYN)</option>
+          <option value="BOB">Bolivijos bolivianas (BOB)</option>
+          <option value="CLP">Čilės pesas (CLP)</option>
+          <option value="COP">Kolumbijos pesas (COP)</option>
+          <option value="DJF">Džibučio frankas (DJF)</option>
+          <option value="DZD">Alžyro dinaras (DZD)</option>
+          <option value="EGP">Egipto svara (EGP)</option>
+          <option value="ETB">Etiopijos biras (ETB)</option>
+          <option value="GEL">Gruzijos laris (GEL)</option>
+          <option value="GNF">Gvinėjos frankas (GNF)</option>
+          <option value="YER">Jemeno rialas (YER)</option>
+          <option value="IQD">Irako dinaras (IQD)</option>
+          <option value="IRR">Irano rialas (IRR)</option>
+          <option value="JOD">Jordanijos dinaras (JOD)</option>
+          <option value="KES">Kenijos šilingas (KES)</option>
+          <option value="KGS">Kirgizijos somas (KGS)</option>
+          <option value="KWD">Kuveito dinaras (KWD)</option>
+          <option value="KZT">Kazachstano tengė (KZT)</option>
+          <option value="LBP">Libano svaras (LBP)</option>
+          <option value="LKR">Šri Lankos rupija (LKR)</option>
+          <option value="MAD">Maroko dirhamas (MAD)</option>
+          <option value="MDL">Moldovos lėja (MDL)</option>
+          <option value="MGA">Madagaskaro ariaris (MGA)</option>
+          <option value="MKD">Makedonijos denaras (MKD)</option>
+          <option value="MNT">Mongolijos tugrikas (MNT)</option>
+          <option value="MZN">Mozambiko metikalis (MZN)</option>
+          <option value="PAB">Panamos balboja (PAB)</option>
+          <option value="PEN">Peru solis (PEN)</option>
+          <option value="PKR">Pakistano rupija (PKR)</option>
+          <option value="QAR">Kataro rialas (QAR)</option>
+          <option value="RSD">Serbijos dinaras (RSD)</option>
+          <option value="SAR">Saudo Arabijos rijalas (SAR)</option>
+          <option value="SYP">Sirijos  svaras (SYP)</option>
+          <option value="TJS">Tadžikistano somonis (TJS)</option>
+          <option value="TMT">Turkmėnistano naujasis manatas (TMT)</option>
+          <option value="TND">Tuniso dinaras (TND)</option>
+          <option value="TZS">Tanzanijos šilingas (TZS)</option>
+          <option value="UAH">Ukrainos grivina (UAH)</option>
+          <option value="UYU">Urugvajaus pesas (UYU)</option>
+          <option value="UZS">Uzbekistano sumas (UZS)</option>
+          <option value="VEF">Venesuelos bolivaras (VEB)</option>
+          <option value="VND">Vietnamo dongas (VND)</option>
+          <option value="XAF">CFA BEAC frankas (XAF)</option>
+          <option value="XOF">CFA BCEAO frankas (XOF)</option>
+        </select>
+      </div>
+      <div class="box">
+          <input id="inputDateFrom" type="date" value="2018-12-04"/>
+      </div>
+      <div class="box">
+          <input id="inputDateTo" type="date" value="2018-12-05"/>
+      </div>
+      <div>
+          <input type="button" value="Vykdyti" id='buttonsoap' onclick="soap();" />
+      </div>
+  </form>
+	<p id="difference"></p>
+	<div id="tablearea">
+	</div>
+	<script src="js/cur.js" charset="utf-8"></script>
 </body>
 </html>
